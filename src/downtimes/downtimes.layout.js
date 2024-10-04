@@ -78,6 +78,7 @@ function createDowntimeLayout() {
         downtimeSheet.deleteColumns(15, downtimeSheet.getMaxColumns() - 15)
     }
 
+    var triggers = ScriptApp.getProjectTriggers();
     if (
         !triggers.some((trigger) => trigger.getHandlerFunction() == "updateDowntimeTrigger")
     ) {
