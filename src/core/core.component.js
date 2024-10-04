@@ -7,6 +7,7 @@ function createFullLayout() {
   createLogsLayout();
   createSetupLayout();
   createDowntimeLayout();
+  createBossLayouts();
 }
 
 function createBossLayouts() {
