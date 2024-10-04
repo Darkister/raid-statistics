@@ -77,6 +77,12 @@ function createDowntimeLayout() {
     if (downtimeSheet.getLastColumn() < 15 && downtimeSheet.getMaxColumns() != 15) {
         downtimeSheet.deleteColumns(15, downtimeSheet.getMaxColumns() - 15)
     }
+
+    if (
+        !triggers.some((trigger) => trigger.getHandlerFunction() == "updateDowntimeTrigger")
+    ) {
+        ScriptApp.newTrigger("updateDowntimeTrigger").forSpreadsheet(ss).onEdit().create();
+    }
 }
 
 /**
