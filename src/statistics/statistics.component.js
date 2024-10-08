@@ -34,7 +34,7 @@ function fillAllPlayersAccName() {
 
   // add all other players | add only unique players
   players.forEach((r) => {
-    r.forEach((p) => allPlayers.add(p));
+    r.forEach((p) => { if (p != "") { allPlayers.add(p) } });
   });
 
   var fillPlayers = statisticsSheet.getRange(4, 1, allPlayers.size, 17),
