@@ -121,16 +121,19 @@ function writeDataIntoSpreadsheet(logs) {
       Logger.log("Skip log");
     }
   }
-  Logger.log(values);
-  var max = Math.max(...values.map((i) => i.length));
-  for (var value of values) {
+  var cleanedValues = values.filter(function (e) {
+    return e.length;
+  })
+  Logger.log(cleanedValues);
+  var max = Math.max(...cleanedValues.map((i) => i.length));
+  for (var value of cleanedValues) {
     while (value.length < max) {
       value.push("false");
     }
   }
-  var valuesRange = logSheet.getRange(row, 1, logs.length, max);
+  var valuesRange = logSheet.getRange(row, 1, cleanedValues.length, max);
   valuesRange
-    .setValues(values)
+    .setValues(cleanedValues)
     .setBorder(
       null,
       true,
@@ -146,9 +149,9 @@ function writeDataIntoSpreadsheet(logs) {
     .setFontSize("10")
     .setBackground("#FFFFFF")
     .setFontColor("#000000");
-  logSheet.getRange(row, 1, logs.length, 1).setFontWeight("bold");
-  logSheet.getRange(row, 2, logs.length, 1).setFontColor("#00B2EE");
-  logSheet.getRange(row, 5, logs.length, 1).setNumberFormat("#0.00%");
+  logSheet.getRange(row, 1, cleanedValues.length, 1).setFontWeight("bold");
+  logSheet.getRange(row, 2, cleanedValues.length, 1).setFontColor("#00B2EE");
+  logSheet.getRange(row, 5, cleanedValues.length, 1).setNumberFormat("#0.00%");
 }
 
 /** Get data of a log as json
