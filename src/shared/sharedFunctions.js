@@ -10,8 +10,8 @@ function removeEndingZeros(arr) {
 }
 
 /** Function that count occurrences of a substring in a string;
- * @param {String} string               The string
- * @param {String} subString            The sub string to search for
+ * @param {String} string     The string
+ * @param {String} subString  The sub string to search for
  */
 function occurrences(string, substring) {
   let re = new RegExp(substring, "g");
