@@ -401,6 +401,15 @@ function getBossFilter(fightName) {
   ) {
     return basicMechanics.concat(qpeerMechanics);
   }
+  if (fightName === "Greer, the Blightbringer") {
+    return basicMechanics.concat(greerMechanics);
+  }
+  if (fightName === "Decima, the Stormsinger") {
+    return basicMechanics.concat(decimaMechanics);
+  }
+  if (fightName === "Ura, the Steamshrieker") {
+    return basicMechanics.concat(uraMechanics);
+  }
   if (
     fightName === "Aetherblade Hideout" ||
     fightName === "Aetherblade Hideout CM"

@@ -37,6 +37,10 @@ function createBossLayouts() {
   createBossSpecificLayout("Cardinal Adina", adinaMechanics);
   createBossSpecificLayout("Cardinal Sabir", sabirMechanics);
   createBossSpecificLayout("Qadim the Peerless", qpeerMechanics);
+  // Wing 8
+  createBossSpecificLayout("Greer, the Blightbringer", greerMechanics);
+  createBossSpecificLayout("Decima, the Stormsinger", decimaMechanics);
+  createBossSpecificLayout("Ura, the Steamshrieker", uraMechanics);
   // EoD Strikes
   createBossSpecificLayout("Aetherblade Hideout", trinMechanics);
   createBossSpecificLayout("Xunlai Jade Junkyard", ankkaMechanics);

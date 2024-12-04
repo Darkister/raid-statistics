@@ -140,6 +140,28 @@ var scriptVersion = "0.0.5",
     "Aimed Projectile",
     "Bad Tether",
   ],
+  greerMechanics = [
+    "Reflected Projectile Hit (Greer)",
+    "Reflected Projectile Hit (Reeg)",
+    "Infectious Rot (Green Fail)",
+    "Noxius Blight (Green)"
+  ],
+  decimaMechanics = [
+    "Fluxlance Hit",
+    "Fluxlance Fusillade Hit",
+    "Fluxlance Salvo Hit",
+    "Fluxlance Target (Sequential)",
+    "Fluxlance Target",
+    "Fluxlance (Red Arrow)"
+  ],
+  uraMechanics = [
+    "Exposed Applied",
+    "Bloodstone Shard Pick-up",
+    "Dispel",
+    "Pressure Blast Target",
+    "Pressure Blast Bubble",
+    "Steam Prison Target (Ring)"
+  ],
   trinMechanics = [
     "Cone",
     "Side Cone",
