@@ -2,7 +2,6 @@
  * @param {*} e
  */
 function updateStatisticsTrigger(e) {
-  Logger.log(e.changeType);
   if (
     e &&
     e.source &&

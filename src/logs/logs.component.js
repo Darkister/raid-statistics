@@ -180,7 +180,6 @@ function firstDeath(json) {
     players = json.players,
     deads = mechanics.find((mechanic) => mechanic.name === "Dead");
 
-  Logger.log(deads);
   // if nobody died return false
   if (!deads) {
     return false;

@@ -13,7 +13,6 @@ function checkForNewerVersion() {
     );
   data = JSON.parse(data.getContentText());
 
-  Logger.log(data.tag_name);
   if (data.tag_name == scriptVersion) {
     return "You are using the latest Version :)";
   } else {

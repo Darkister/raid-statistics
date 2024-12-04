@@ -2,7 +2,6 @@
  * @param {*} e
  */
 function updateDowntimeTrigger(e) {
-    Logger.log(e.changeType);
     if (
         e &&
         e.source &&
@@ -28,12 +27,11 @@ function fillAllDays() {
         uniqueDates = new Set(flatDays.map(date => date.getTime())), // Vergleicht die Zeitstempel
         uniqueDateObjects = Array.from(uniqueDates).map(timestamp => new Date(timestamp));
 
-    Logger.log(uniqueDateObjects.length);
+    Logger.log("Amount of Days: " + uniqueDateObjects.length);
 
     var fillDays = downtimeSheet.getRange(4, 1, uniqueDateObjects.length, 14),
         daysValues = new Array(uniqueDateObjects.length).fill().map((_) => []);
 
-    Logger.log(daysValues);
     for (var a = 0; a < daysValues.length; a++) {
         daysValues[a].push(
             // Date
