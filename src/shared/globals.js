@@ -1,4 +1,4 @@
-var scriptVersion = "0.1.0",
+var scriptVersion = "0.1.1",
   ss = SpreadsheetApp.getActiveSpreadsheet(),
   settingsSheet = ss.getSheetByName("Settings"),
   logSheet = ss.getSheetByName("Logs"),

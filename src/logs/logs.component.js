@@ -400,10 +400,16 @@ function getBossFilter(fightName) {
   ) {
     return basicMechanics.concat(qpeerMechanics);
   }
-  if (fightName === "Greer, the Blightbringer") {
+  if (
+    fightName === "Greer, the Blightbringer" ||
+    fightName === "Greer, der Pestilenzbringer"
+  ) {
     return basicMechanics.concat(greerMechanics);
   }
-  if (fightName === "Decima, the Stormsinger") {
+  if (
+    fightName === "Decima, the Stormsinger" ||
+    fightName === "Decima, die Sturmsängerin"
+  ) {
     return basicMechanics.concat(decimaMechanics);
   }
   if (fightName === "Ura, the Steamshrieker") {
