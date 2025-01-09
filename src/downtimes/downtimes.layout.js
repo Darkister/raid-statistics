@@ -7,7 +7,7 @@ function createDowntimeLayout() {
         downtimeSheet = ss.getSheetByName("Up-/Downtime");
     }
 
-    var downtimeRange = downtimeSheet.getRange(1, 1, 3, 14),
+    var downtimeRange = downtimeSheet.getRange(1, 1, 3, 15),
         downtimeValue = downtimeRange.getValues();
 
     downtimeValue[0][7] = "Overall";
@@ -25,6 +25,7 @@ function createDowntimeLayout() {
     downtimeValue[1][11] = "Encounter Time";
     downtimeValue[1][12] = "Encounter %";
     downtimeValue[1][13] = "Downtime";
+    downtimeValue[1][14] = "Fail Time";
     downtimeValue[2][0] = "AVG";
     downtimeValue[2][1] = "=AVERAGE(B4:B)";
     downtimeValue[2][2] = "=AVERAGE(C4:C)";
@@ -38,6 +39,7 @@ function createDowntimeLayout() {
     downtimeValue[2][11] = "=AVERAGE(L4:L)";
     downtimeValue[2][12] = "=L3/G3";
     downtimeValue[2][13] = "=AVERAGE(N4:N)";
+    downtimeValue[2][14] = "=AVERAGE(O4:O)";
 
     downtimeRange
         .setValues(downtimeValue)
@@ -46,9 +48,9 @@ function createDowntimeLayout() {
         .setFontWeight("bold");
     downtimeSheet.getRange(1, 8, 1, 3).mergeAcross();
     downtimeSheet.getRange(1, 12, 1, 3).mergeAcross();
-    downtimeSheet.getRange(2, 1, 1, 14).setBackground(gray);
+    downtimeSheet.getRange(2, 1, 1, 15).setBackground(gray);
     downtimeSheet
-        .getRange(2, 1, 2, 14)
+        .getRange(2, 1, 2, 15)
         .setBorder(true,
             true,
             true,
@@ -58,7 +60,7 @@ function createDowntimeLayout() {
             "black",
             SpreadsheetApp.BorderStyle.SOLID_THICK
         );
-    downtimeSheet.getRange(1, 1, 3, 14).setHorizontalAlignment("center");
+    downtimeSheet.getRange(1, 1, 3, 15).setHorizontalAlignment("center");
     downtimeSheet.setColumnWidth(1, 82);
     downtimeSheet.setColumnWidths(2, 3, 95);
     downtimeSheet.setColumnWidths(5, 3, 78);
@@ -69,13 +71,14 @@ function createDowntimeLayout() {
     downtimeSheet.setColumnWidth(12, 120);
     downtimeSheet.setColumnWidth(13, 99);
     downtimeSheet.setColumnWidth(14, 79);
+    downtimeSheet.setColumnWidth(15, 80);
     downtimeSheet.getRange(1, 11, 3, 1).setBackground(black);
 
     if (downtimeSheet.getLastRow() < 20 && downtimeSheet.getMaxRows() != 20) {
         downtimeSheet.deleteRows(20, downtimeSheet.getMaxRows() - 20)
     }
-    if (downtimeSheet.getLastColumn() < 15 && downtimeSheet.getMaxColumns() != 15) {
-        downtimeSheet.deleteColumns(15, downtimeSheet.getMaxColumns() - 15)
+    if (downtimeSheet.getLastColumn() < 16 && downtimeSheet.getMaxColumns() != 16) {
+        downtimeSheet.deleteColumns(16, downtimeSheet.getMaxColumns() - 16)
     }
 
     var triggers = ScriptApp.getProjectTriggers();

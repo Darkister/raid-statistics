@@ -10,7 +10,7 @@ function updateDowntimeTrigger(e) {
             e.changeType === "OTHER")
     ) {
         downtimeSheet
-            .getRange(4, 1, downtimeSheet.getMaxRows() - 4, 14)
+            .getRange(4, 1, downtimeSheet.getMaxRows() - 4, 15)
             .clear();
         var amountOfDays = fillAllDays();
         console.log(amountOfDays);
@@ -29,7 +29,7 @@ function fillAllDays() {
 
     Logger.log("Amount of Days: " + uniqueDateObjects.length);
 
-    var fillDays = downtimeSheet.getRange(4, 1, uniqueDateObjects.length, 14),
+    var fillDays = downtimeSheet.getRange(4, 1, uniqueDateObjects.length, 15),
         daysValues = new Array(uniqueDateObjects.length).fill().map((_) => []);
 
     for (var a = 0; a < daysValues.length; a++) {
@@ -61,7 +61,9 @@ function fillAllDays() {
             // negativ fails Encounter %
             "=L" + (a + 4) + "/G" + (a + 4),
             // negativ fails Downtime
-            "=G" + (a + 4) + "-L" + (a + 4)
+            "=G" + (a + 4) + "-L" + (a + 4),
+            // Fail Time
+            "=H" + (a + 4) + "-L" + (a + 4)
         );
     }
 
