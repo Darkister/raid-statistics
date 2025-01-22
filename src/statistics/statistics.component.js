@@ -21,15 +21,14 @@ function updateStatisticsTrigger(e) {
 /** Get the Accountnames of all Players and fill it into the Statisticssheet
  */
 function fillAllPlayersAccName() {
-  var amountOfPlayersToView = settingsSheet.getRange(2, 3).getValue(),
+  var static = staticSheet.getRange(2, 2, staticSheet.getLastRow() - 1, 1).getValues(),
     players = logSheet
       .getRange(2, 13, logSheet.getLastRow() - 1, 10)
       .getValues(),
-    static = staticSheet.getRange(2, 2, amountOfPlayersToView, 1).getValues(),
     allPlayers = new Set();
 
-  // add all members of the static
-  static.forEach((p) => allPlayers.add(p[0]));
+  // add all unique members of the static
+  static.forEach((p) => { if (p != "") { allPlayers.add(p[0]) } });
 
   // add all other players | add only unique players
   players.forEach((r) => {
@@ -44,37 +43,37 @@ function fillAllPlayersAccName() {
       // Players
       arr[a],
       // Participation total
-      "=COUNTIF(Logs!M2:V;A" + (a + 4) + ")",
+      "=IFERROR(COUNTIF(Logs!M2:V;A" + (a + 4) + "))",
       // Participation percent
-      "=B" + (a + 4) + "/A3",
+      "=IFERROR(B" + (a + 4) + "/A3)",
       // First Death total
-      "=COUNTIFS(Logs!K2:K;A" + (a + 4) + ";Logs!L2:L;FALSE)",
+      "=IFERROR(COUNTIFS(Logs!K2:K;A" + (a + 4) + ";Logs!L2:L;FALSE))",
       // First Death percent
-      "=D" + (a + 4) + "/B" + (a + 4),
+      "=IFERROR(D" + (a + 4) + "/B" + (a + 4) + ")",
       // Downs total
-      '=COUNTIFS(Logs!CE2:CE;"*" & A' + (a + 4) + ' & "*";Logs!L2:L;FALSE)',
+      '=IFERROR(COUNTIFS(Logs!CE2:CE;"*" & A' + (a + 4) + ' & "*";Logs!L2:L;FALSE))',
       // Downs percent
-      "=F" + (a + 4) + "/B" + (a + 4),
+      "=IFERROR(F" + (a + 4) + "/B" + (a + 4) + ")",
       // Res total
-      '=COUNTIFS(Logs!CH2:CH;"*" & A' + (a + 4) + ' & "*")',
+      '=IFERROR(COUNTIFS(Logs!CH2:CH;"*" & A' + (a + 4) + ' & "*"))',
       // Res percent
-      "=H" + (a + 4) + "/B" + (a + 4),
+      "=IFERROR(H" + (a + 4) + "/B" + (a + 4) + ")",
       // Deads total
-      '=COUNTIFS(Logs!CF2:CF;"*" & A' + (a + 4) + ' & "*")',
+      '=IFERROR(COUNTIFS(Logs!CF2:CF;"*" & A' + (a + 4) + ' & "*"))',
       // Deads percent
-      "=J" + (a + 4) + "/B" + (a + 4),
+      "=IFERROR(J" + (a + 4) + "/B" + (a + 4) + ")",
       // Res Duration Average
-      "=SUMIFS(Logs!BA2:BJ;Logs!M2:V;A" + (a + 4) + ") / H" + (a + 4),
+      "=IFERROR(SUMIFS(Logs!BA2:BJ;Logs!M2:V;A" + (a + 4) + ") / H" + (a + 4) + ")",
       // Damage Taken Average
-      "=SUMIFS(Logs!AQ2:AZ;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4),
+      "=IFERROR(SUMIFS(Logs!AQ2:AZ;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4) + ")",
       // DPS Average
-      "=SUMIFS(Logs!W2:AF;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4),
+      "=IFERROR(SUMIFS(Logs!W2:AF;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4) + ")",
       // Breakbar Average
-      "=SUMIFS(Logs!AG2:AP;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4),
+      "=IFERROR(SUMIFS(Logs!AG2:AP;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4) + ")",
       // Condi Cleanses Average
-      "=SUMIFS(Logs!BK2:BT;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4),
+      "=IFERROR(SUMIFS(Logs!BK2:BT;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4) + ")",
       // Boon Strips Average
-      "=SUMIFS(Logs!BU2:CD;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4)
+      "=IFERROR(SUMIFS(Logs!BU2:CD;Logs!M2:V;A" + (a + 4) + ") / B" + (a + 4) + ")"
     );
   }
 
@@ -95,7 +94,7 @@ function fillAllPlayersAccName() {
       SpreadsheetApp.BorderStyle.SOLID_THICK
     );
   statisticsSheet
-    .getRange(4, 1, 5, 17)
+    .getRange(4, 1, staticSheet.getRange(2, 2, 5, 1).getValues().flat().filter(value => value !== "").length, 17)
     .setBorder(
       null,
       null,
@@ -107,7 +106,7 @@ function fillAllPlayersAccName() {
       SpreadsheetApp.BorderStyle.SOLID
     );
   statisticsSheet
-    .getRange(4, 1, amountOfPlayersToView, 17)
+    .getRange(4, 1, staticSheet.getRange(2, 2, 10, 1).getValues().flat().filter(value => value !== "").length, 17)
     .setBorder(
       null,
       null,
@@ -118,5 +117,6 @@ function fillAllPlayersAccName() {
       "black",
       SpreadsheetApp.BorderStyle.SOLID_THICK
     );
+
   return allPlayers.size;
 }
