@@ -60,111 +60,171 @@ function createBossSpecificLayout(encounter, bossMechanics) {
   // Participation total
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][1] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(MMULT((Logs!M2:V=A' +
+      '=IF(A' +
       (i + 4) +
-      ")*1;TRANSPOSE(COLUMN(Logs!M2:V)^0))>0))";
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(MMULT((Logs!M2:V=A' +
+      (i + 4) +
+      ")*1;TRANSPOSE(COLUMN(Logs!M2:V)^0))>0))))";
   }
 
   // Participation percent
   for (i = 0; i < 10; i++) {
-    bossValue[i + 3][2] = "=B" + (i + 4) + "/B31";
+    bossValue[i + 3][2] =
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(B' +
+      (i + 4) +
+      "/B31))";
   }
 
   // Kills total
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][3] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D=TRUE)*(MMULT((Logs!M2:V=A' +
+      '=IF(A' +
       (i + 4) +
-      ")*1;TRANSPOSE(COLUMN(Logs!M2:V)^0))>0))";
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D=TRUE)*(MMULT((Logs!M2:V=A' +
+      (i + 4) +
+      ")*1;TRANSPOSE(COLUMN(Logs!M2:V)^0))>0))))";
   }
 
   // Kills percent
   for (i = 0; i < 10; i++) {
-    bossValue[i + 3][4] = "=D" + (i + 4) + "/B" + (i + 4);
+    bossValue[i + 3][4] =
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(D' +
+      (i + 4) +
+      "/B" +
+      (i + 4) +
+      "))";
   }
 
   // First Death total
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][5] =
-      "=COUNTIFS(Logs!C2:C; A1; Logs!K2:K; A" +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!K2:K; A' +
       (i + 4) +
       ') + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!K2:K; A' +
       (i + 4) +
-      ")";
+      ")))";
   }
 
   // First Death percent
   for (i = 0; i < 10; i++) {
-    bossValue[i + 3][6] = "=F" + (i + 4) + "/B" + (i + 4);
+    bossValue[i + 3][6] =
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(F' +
+      (i + 4) +
+      "/B" +
+      (i + 4) +
+      "))";
   }
 
   // Downs total
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][7] =
-      '=COUNTIFS(Logs!C2:C; A1;Logs!CE2:CE;"*" & A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(COUNTIFS(Logs!C2:C; A1;Logs!CE2:CE;"*" & A' +
       (i + 4) +
       '& "*";Logs!J2:J;FALSE) + COUNTIFS(Logs!C2:C; A1 & " CM";Logs!CE2:CE;"*" & A' +
       (i + 4) +
-      '& "*";Logs!L2:L;FALSE)';
+      '& "*";Logs!L2:L;FALSE)))';
   }
 
   // Downs percent
   for (i = 0; i < 10; i++) {
-    bossValue[i + 3][8] = "=H" + (i + 4) + "/B" + (i + 4);
+    bossValue[i + 3][8] =
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(H' +
+      (i + 4) +
+      "/B" +
+      (i + 4) +
+      "))";
   }
 
   // Res total
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][9] =
-      '=COUNTIFS(Logs!C2:C; A1; Logs!CH2:CH;"*" & A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!CH2:CH;"*" & A' +
       (i + 4) +
       '& "*") + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!CH2:CH;"*" & A' +
       (i + 4) +
-      '& "*")';
+      '& "*")))';
   }
 
   // Res percent
   for (i = 0; i < 10; i++) {
-    bossValue[i + 3][10] = "=J" + (i + 4) + "/B" + (i + 4);
+    bossValue[i + 3][10] =
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(J' +
+      (i + 4) +
+      "/B" +
+      (i + 4) +
+      "))";
   }
 
   // Deads total
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][11] =
-      '=COUNTIFS(Logs!C2:C; A1; Logs!CF2:CF;"*" & A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!CF2:CF;"*" & A' +
       (i + 4) +
       '& "*") + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!CF2:CF;"*" & A' +
       (i + 4) +
-      '& "*")';
+      '& "*")))';
   }
 
   // Deads percent
   for (i = 0; i < 10; i++) {
-    bossValue[i + 3][12] = "=L" + (i + 4) + "/B" + (i + 4);
+    bossValue[i + 3][12] =
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(L' +
+      (i + 4) +
+      "/B" +
+      (i + 4) +
+      "))";
   }
 
   // ResTime
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][13] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!M2:V=A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!M2:V=A' +
       (i + 4) +
       ")*(Logs!BA2:BJ)) / J" +
-      (i + 4);
+      (i + 4) +
+      "))";
   }
 
   // Damage Taken AVG
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][14] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
       (i + 4) +
       ")*(Logs!AQ2:AZ)) / D" +
-      (i + 4);
+      (i + 4) +
+      "))";
   }
 
   // Damage taken lowest
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][15] =
-      '=MIN(MAP(FILTER(Logs!M2:V; (Logs!C2:C = A1)+(Logs!C2:C = A1 & " CM");Logs!D2:D = TRUE; (Logs!M2:M = A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(MIN(MAP(FILTER(Logs!M2:V; (Logs!C2:C = A1)+(Logs!C2:C = A1 & " CM");Logs!D2:D = TRUE; (Logs!M2:M = A' +
       (i + 4) +
       ") + (Logs!N2:N = A" +
       (i + 4) +
@@ -206,22 +266,27 @@ function createBossSpecificLayout(encounter, bossMechanics) {
       (i + 4) +
       "));LAMBDA(pers;value;IF(pers=A" +
       (i + 4) +
-      "; value;999999))))";
+      "; value;999999))))))";
   }
 
   // DPS AVG
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][16] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
       (i + 4) +
       ")*(Logs!W2:AF)) / D" +
-      (i + 4);
+      (i + 4) +
+      "))";
   }
 
   // DPS highest
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][17] =
-      '=MAX(MAP(FILTER(Logs!M2:V; (Logs!C2:C = A1)+(Logs!C2:C = A1 & " CM");Logs!D2:D = TRUE; (Logs!M2:M = A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(MAX(MAP(FILTER(Logs!M2:V; (Logs!C2:C = A1)+(Logs!C2:C = A1 & " CM");Logs!D2:D = TRUE; (Logs!M2:M = A' +
       (i + 4) +
       ") + (Logs!N2:N = A" +
       (i + 4) +
@@ -263,22 +328,27 @@ function createBossSpecificLayout(encounter, bossMechanics) {
       (i + 4) +
       "));LAMBDA(pers;value;IF(pers=A" +
       (i + 4) +
-      "; value;0))))";
+      "; value;0))))))";
   }
 
   // Breakbar AVG
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][18] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
       (i + 4) +
       ")*(Logs!AG2:AP)) / D" +
-      (i + 4);
+      (i + 4) +
+      "))";
   }
 
   // Breakbar highest
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][19] =
-      '=MAX(MAP(FILTER(Logs!M2:V; (Logs!C2:C = A1)+(Logs!C2:C = A1 & " CM");Logs!D2:D = TRUE; (Logs!M2:M = A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(MAX(MAP(FILTER(Logs!M2:V; (Logs!C2:C = A1)+(Logs!C2:C = A1 & " CM");Logs!D2:D = TRUE; (Logs!M2:M = A' +
       (i + 4) +
       ") + (Logs!N2:N = A" +
       (i + 4) +
@@ -320,25 +390,31 @@ function createBossSpecificLayout(encounter, bossMechanics) {
       (i + 4) +
       "));LAMBDA(pers;value;IF(pers=A" +
       (i + 4) +
-      "; value;0))))";
+      "; value;0))))))";
   }
 
   // Condi Cleans
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][20] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
       (i + 4) +
       ")*(Logs!BK2:BT)) / D" +
-      (i + 4);
+      (i + 4) +
+      "))";
   }
 
   // BoonStrips
   for (i = 0; i < 10; i++) {
     bossValue[i + 3][21] =
-      '=SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
+      '=IF(A' +
+      (i + 4) +
+      '=""; ""; IFERROR(SUMPRODUCT(((Logs!C2:C=A1)+(Logs!C2:C=A1 & " CM"))*(Logs!D2:D = TRUE)*(Logs!M2:V=A' +
       (i + 4) +
       ")*(Logs!BU2:CD)) / D" +
-      (i + 4);
+      (i + 4) +
+      "))";
   }
 
   if (bossMechanics.length > 0) {
@@ -347,38 +423,41 @@ function createBossSpecificLayout(encounter, bossMechanics) {
       bossValue[16][i + 1] = "AVG";
       for (j = 0; j < 10; j++) {
         bossValue[j + 17][i + 1] =
-          '=ARRAYFORMULA(COUNTIF(SPLIT(INDEX(Logs!A2:ZZ; 0; MATCH("' +
+          '=IF(A' +
+          (j + 18) +
+          '=""; ""; IFERROR(ARRAYFORMULA(COUNTIF(SPLIT(INDEX(Logs!A2:ZZ; 0; MATCH("' +
           bossMechanics[i] +
           '"; Logs!A1:ZZ1; 0)); ","); A' +
           (j + 18) +
           ")) / B" +
-          (j + 4);
+          (j + 4) +
+          "))";
       }
     }
   }
 
   bossValue[28][0] = "AVG Duration";
   bossValue[28][1] =
-    '=(SUMIFS(Logs!G2:G; Logs!C2:C; A1; Logs!D2:D; TRUE) + SUMIFS(Logs!G2:G; Logs!C2:C; A1 & " CM"; Logs!D2:D; TRUE)) / B32 / 86400000';
+    '=IFERROR((SUMIFS(Logs!G2:G; Logs!C2:C; A1; Logs!D2:D; TRUE) + SUMIFS(Logs!G2:G; Logs!C2:C; A1 & " CM"; Logs!D2:D; TRUE)) / B32 / 86400000)';
   bossValue[29][0] = "fastes Kill";
   bossValue[29][1] =
-    '=HYPERLINK(INDEX(Logs!B2:B; MATCH(MIN(FILTER(Logs!G2:G; (Logs!C2:C = A1 & " CM")+(Logs!C2:C = A1); Logs!D2:D = TRUE; Logs!G2:G > 0)); Logs!G2:G; 0)); MIN(FILTER(Logs!G2:G; (Logs!C2:C = A1 & " CM")+(Logs!C2:C = A1); Logs!D2:D = TRUE; Logs!G2:G > 0)) / 86400000)';
+    '=IFERROR(HYPERLINK(INDEX(Logs!B2:B; MATCH(MIN(FILTER(Logs!G2:G; (Logs!C2:C = A1 & " CM")+(Logs!C2:C = A1); Logs!D2:D = TRUE; Logs!G2:G > 0)); Logs!G2:G; 0)); MIN(FILTER(Logs!G2:G; (Logs!C2:C = A1 & " CM")+(Logs!C2:C = A1); Logs!D2:D = TRUE; Logs!G2:G > 0)) / 86400000))';
   bossValue[30][0] = "amount of Tries";
-  bossValue[30][1] = '=COUNTIF(Logs!C2:C; A1) + COUNTIF(Logs!C2:C; A1 & " CM")';
+  bossValue[30][1] = '=IFERROR(COUNTIF(Logs!C2:C; A1) + COUNTIF(Logs!C2:C; A1 & " CM"))';
   bossValue[31][0] = "amount of Kills";
   bossValue[31][1] =
-    '=COUNTIFS(Logs!C2:C; A1; Logs!D2:D; TRUE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!D2:D; TRUE)';
+    '=IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!D2:D; TRUE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!D2:D; TRUE))';
   bossValue[32][0] = "thereof in CM";
   bossValue[32][1] =
-    '=COUNTIFS(Logs!C2:C; A1; Logs!D2:D; TRUE; Logs!J2:J; TRUE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!D2:D; TRUE; Logs!J2:J; TRUE)';
+    '=IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!D2:D; TRUE; Logs!J2:J; TRUE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!D2:D; TRUE; Logs!J2:J; TRUE))';
   bossValue[33][0] = "Kills with 0 Deaths";
   bossValue[33][1] =
-    '=COUNTIFS(Logs!C2:C; A1; Logs!CF2:CF; FALSE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!CF2:CF; FALSE)';
+    '=IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!CF2:CF; FALSE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!CF2:CF; FALSE))';
   bossValue[34][0] = "Kills with 0 Downs";
   bossValue[34][1] =
-    '=COUNTIFS(Logs!C2:C; A1; Logs!CE2:CE; FALSE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!CE2:CE; FALSE)';
+    '=IFERROR(COUNTIFS(Logs!C2:C; A1; Logs!CE2:CE; FALSE) + COUNTIFS(Logs!C2:C; A1 & " CM"; Logs!CE2:CE; FALSE))';
   bossValue[35][0] = "SuccessRate";
-  bossValue[35][1] = "=B32/B31";
+  bossValue[35][1] = "=IFERROR(B32/B31)";
 
   bossSpecificSheet.getRange(1, 1).setFontSize(14).setFontWeight("bold");
   bossSpecificSheet
