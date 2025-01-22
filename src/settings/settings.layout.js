@@ -19,7 +19,7 @@ function createSettingsLayout() {
     enterLogRange = settingsSheet.getRange(4, 3, 8, 4),
     infoRange = settingsSheet.getRange(3, 8, 11, 4),
     amountOfPlayersToValidate = [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
     ],
     maxRows = settingsSheet.getMaxRows(),
     maxColumns = settingsSheet.getMaxColumns();
@@ -35,7 +35,7 @@ function createSettingsLayout() {
   amountOfPlayersToValidateCell.setDataValidation(rule);
 
   if (settingsValue[1][2] == "") {
-    settingsValue[1][2] = 10;
+    settingsValue[1][2] = 0;
   }
 
   settingsValue[3][1] = "Enter Logs here:";

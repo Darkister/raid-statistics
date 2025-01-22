@@ -101,11 +101,11 @@ function updateSetupLayout(amountOfPlayersToView) {
   if (amountOfPlayersToView < 15) {
     clearSetupLayoutAfterRow(amountOfPlayersToView + 2);
   }
-
+  staticSheet.getRange(1, 1, staticSheet.getMaxRows(), staticSheet.getMaxColumns()).setDataValidation(null);
   var staticRange = staticSheet.getRange(1, 1, 1 + amountOfPlayersToView, 4),
     staticValue = staticRange.getValues();
 
-  if (amountOfPlayersToView <= 5) {
+  if (amountOfPlayersToView <= 5 && amountOfPlayersToView != 0) {
     staticValue[1][0] = "1";
     staticSheet.getRange(2, 1, amountOfPlayersToView, 1).mergeVertically();
     staticSheet
@@ -120,7 +120,7 @@ function updateSetupLayout(amountOfPlayersToView) {
         "black",
         SpreadsheetApp.BorderStyle.SOLID_THICK
       );
-  } else if (amountOfPlayersToView <= 10) {
+  } else if (amountOfPlayersToView <= 10 && amountOfPlayersToView != 0) {
     staticValue[1][0] = "1";
     staticValue[6][0] = "2";
     staticSheet.getRange(2, 1, 5, 1).mergeVertically();
@@ -149,7 +149,7 @@ function updateSetupLayout(amountOfPlayersToView) {
         "black",
         SpreadsheetApp.BorderStyle.SOLID_THICK
       );
-  } else {
+  } else if (amountOfPlayersToView <= 15 && amountOfPlayersToView != 0) {
     staticValue[1][0] = "1";
     staticValue[6][0] = "2";
     staticValue[11][0] = "Backup";
@@ -203,6 +203,14 @@ function updateSetupLayout(amountOfPlayersToView) {
     .setFontWeight("bold")
     .setHorizontalAlignment("center")
     .setVerticalAlignment("middle");
+
+  var dropdownRange = staticSheet.getRange(2, 2, amountOfPlayersToView, 1),
+    dropdownRule = SpreadsheetApp.newDataValidation()
+      .requireValueInRange(statisticsSheet.getRange('A4:A')) // Values from source
+      .setAllowInvalid(true) // allow invalid values
+      .build();
+  dropdownRange.setDataValidation(dropdownRule);
+  SpreadsheetApp.getUi().alert("Updated Players to view to " + amountOfPlayersToView.toString());
 }
 
 /** Clean up fix values in Sheet after input
@@ -210,11 +218,11 @@ function updateSetupLayout(amountOfPlayersToView) {
  */
 function clearSetupLayoutAfterRow(row) {
   var staticRangeToClearStyle = staticSheet.getRange(
-      row,
-      1,
-      staticSheet.getMaxRows() - row,
-      15
-    ),
+    row,
+    1,
+    staticSheet.getMaxRows() - row,
+    15
+  ),
     staticRangeToClearText = staticSheet.getRange(
       row,
       1,

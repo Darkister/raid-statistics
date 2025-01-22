@@ -52,8 +52,13 @@ function editTrigger(e) {
     statusCell = settingsSheet.getRange(13, 3),
     formatedLogs,
     playersToView = settingsSheet.getRange(2, 3).getValue(),
-    players = staticSheet.getRange(2, 2, playersToView, 1).getValues(),
-    infoRange = settingsSheet.getRange(3, 8, 11, 4),
+    players = "";
+  if (playersToView === 0) {
+    players = "";
+  } else {
+    players = staticSheet.getRange(2, 2, playersToView, 1).getValues();
+  }
+  var infoRange = settingsSheet.getRange(3, 8, 11, 4),
     infoValue = infoRange.getValues(),
     filteredLogs;
 
@@ -78,39 +83,32 @@ function editTrigger(e) {
       inputIsValid = false;
     }
 
-    if (!playersToView || players.filter((e) => e[0]).length != playersToView) {
-      infoValue[0][0] =
-        "Players in Setup & Co don't match amount of players to view, fill missing players and try again";
-      infoRange.setValues(infoValue);
-      console.log(players);
-    } else {
-      if (inputIsValid) {
-        statusCell.setValue("Calculating Logs");
-        formatedLogs = formatLogs(value);
-        filteredLogs = preFilterLogs(formatedLogs);
-        Logger.log(filteredLogs);
-        if (filteredLogs.length > 0) {
-          writeDataIntoSpreadsheet(filteredLogs);
-          statusCell.setValue("Finalize calculation");
-          statisticsSheet
-            .getRange(4, 1, statisticsSheet.getMaxRows() - 4, 17)
-            .clear();
-          var amountOfPlayers = fillAllPlayersAccName();
-          updateStatisticsLayout(amountOfPlayers);
-          var amountOfDays = fillAllDays();
-          updateDowntimeLayout(amountOfDays);
-          repairSettingsLayout();
-          rebuildFilter();
-          statusCell.setValue("Calculation complete");
-        } else {
-          repairSettingsLayout();
-          statusCell.setValue("Nothing to Do, Check the Info Box");
-        }
+    if (inputIsValid) {
+      statusCell.setValue("Calculating Logs");
+      formatedLogs = formatLogs(value);
+      filteredLogs = preFilterLogs(formatedLogs);
+      Logger.log(filteredLogs);
+      if (filteredLogs.length > 0) {
+        writeDataIntoSpreadsheet(filteredLogs);
+        statusCell.setValue("Finalize calculation");
+        statisticsSheet
+          .getRange(4, 1, statisticsSheet.getMaxRows() - 4, 17)
+          .clear();
+        var amountOfPlayers = fillAllPlayersAccName();
+        updateStatisticsLayout(amountOfPlayers);
+        var amountOfDays = fillAllDays();
+        updateDowntimeLayout(amountOfDays);
+        repairSettingsLayout();
+        rebuildFilter();
+        statusCell.setValue("Calculation complete");
       } else {
-        statusCell.setValue(
-          "Wrong records found, check the entries or contact an admin/developer"
-        );
+        repairSettingsLayout();
+        statusCell.setValue("Nothing to Do, Check the Info Box");
       }
+    } else {
+      statusCell.setValue(
+        "Wrong records found, check the entries or contact an admin/developer"
+      );
     }
   }
 }
