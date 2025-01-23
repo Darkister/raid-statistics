@@ -74,10 +74,10 @@ function createDowntimeLayout() {
     downtimeSheet.setColumnWidth(15, 80);
     downtimeSheet.getRange(1, 11, 3, 1).setBackground(black);
 
-    if (downtimeSheet.getLastRow() < 20 && downtimeSheet.getMaxRows() != 20) {
+    if (downtimeSheet.getLastRow() < 20 && downtimeSheet.getMaxRows() > 20) {
         downtimeSheet.deleteRows(20, downtimeSheet.getMaxRows() - 20)
     }
-    if (downtimeSheet.getLastColumn() < 16 && downtimeSheet.getMaxColumns() != 16) {
+    if (downtimeSheet.getLastColumn() < 16 && downtimeSheet.getMaxColumns() > 16) {
         downtimeSheet.deleteColumns(16, downtimeSheet.getMaxColumns() - 16)
     }
 
